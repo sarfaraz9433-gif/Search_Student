@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<header>
+
+<h2>Student Search Dashboard</h2>
+
+</header>
+
+<div class="search-box">
+
+<input id="gr" placeholder="GR#">
+
+<input id="name" placeholder="Student Name">
+
+<input id="father" placeholder="Father Name">
+
+<input id="p_class" placeholder="Class">
+
+<input id="section" placeholder="Section">
+
+<input id="contact" placeholder="Contact No">
+
+<select id="campus">
+
+<option value="">All Campuses</option>
+<option>BEACON ASKARI O LEVEL SCHOOL</option>
+<option>BEACON ASKARI SECONDARY SCHOOL</option>
+<option>DREAM CAMBRIDGE CAMPUS</option>
+<option>MONTESSORI EDEN OF BASS</option>
+
+</select>
+
+<button onclick="searchStudent()">Search</button>
+
+</div>
+
+<p id="searchStatus"></p>
+
+<table id="result">
+
+<thead>
+
+<tr>
+<th>S.No</th>
+<th>GR#</th>
+<th>Name</th>
+<th>Father</th>
+<th>Class</th>
+<th>Section</th>
+<th>Contact</th>
+<th>Address</th>
+<th>Campus</th>
+</tr>
+
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+<script src="search.js"></script>
+
+</body>
+</html>
