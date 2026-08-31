@@ -230,36 +230,31 @@ const p_class =
     .trim() || "";
 
 
-const section =
+let section =
     document.getElementById("section")?.value
     .toLowerCase()
     .trim() || "";
-
 
 const contact =
     document.getElementById("contact")?.value
     .toLowerCase()
     .trim() || "";
 
-
-const dob =
+let dob =
     document.getElementById("dob")?.value
     .toLowerCase()
     .trim() || "";
 
-
-const campus =
+let campus =
     document.getElementById("campus")?.value
     .toLowerCase()
     .trim() || "";
 
-
-const selectedStatus =
+let selectedStatus =
     document.getElementById("status")?.value
     .toLowerCase()
     .trim() || "";
-
-
+    
 /* =================================================
    FILTER STUDENTS
 ================================================= */
