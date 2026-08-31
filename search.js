@@ -85,9 +85,10 @@ let name=document.getElementById("name")?.value.toLowerCase().trim()||"";
 let father=document.getElementById("father")?.value.toLowerCase().trim()||"";
 let p_class=document.getElementById("p_class")?.value.toLowerCase().trim()||"";
 let section=document.getElementById("section")?.value.toLowerCase().trim()||"";
-let contact=document.getElementById("contact")?.value.trim()||"";
+let contact=document.getElementById("father_cell")?.value.trim()||"";
 let dob=document.getElementById("dob")?.value.trim()||"";
 let campus=document.getElementById("campus")?.value.trim()||"";
+let status=document.getElementById("status")?.value.trim()||"";
 
 
 let result=students.filter(s=>
@@ -99,7 +100,8 @@ let result=students.filter(s=>
 (!section || s.section?.toLowerCase().includes(section)) &&
 (!contact || s.contact?.includes(contact)) &&
 (!dob || s.dob?.includes(dob)) &&
-(!campus || s.campus===campus)
+(!campus || s.campus===campus) &&
+(!status || s.status?.includes(status)) &&
 
 );
 
