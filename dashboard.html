@@ -3,82 +3,244 @@
 <html>
 
 <head>
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard</title>
+
+<link rel="stylesheet"
+      href="dashboard.css">
+```
+
 </head>
 
 <body>
 
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
-    <h2>Student Search Dashboard</h2>
+
+```
+<h2>
+    Student Search Dashboard
+</h2>
+```
+
 </header>
+
+<!-- =========================================
+     SEARCH AREA
+========================================= -->
 
 <div class="search-box">
 
 ```
-<input id="gr" placeholder="GR#">
+<!-- GR NUMBER -->
 
-<input id="name" placeholder="Student Name">
+<input
+    type="text"
+    id="gr"
+    placeholder="GR#"
+>
 
-<input id="father" placeholder="Father Name">
 
-<input id="p_class" placeholder="Class">
+<!-- STUDENT NAME -->
 
-<input id="section" placeholder="Section">
+<input
+    type="text"
+    id="name"
+    placeholder="Student Name"
+>
 
-<input id="contact" placeholder="Contact No">
 
-<input id="dob" placeholder="DOB (MMM/DD/YYYY)">
+<!-- FATHER NAME -->
+
+<input
+    type="text"
+    id="father"
+    placeholder="Father Name"
+>
+
+
+<!-- PRESENT CLASS -->
+
+<input
+    type="text"
+    id="p_class"
+    placeholder="Class"
+>
+
+
+<!-- SECTION -->
+
+<input
+    type="text"
+    id="section"
+    placeholder="Section"
+>
+
+
+<!-- CONTACT -->
+
+<input
+    type="text"
+    id="contact"
+    placeholder="Contact No"
+>
+
+
+<!-- DOB -->
+
+<input
+    type="text"
+    id="dob"
+    placeholder="DOB (MMM/DD/YYYY)"
+>
+
+
+<!-- CAMPUS -->
 
 <select id="campus">
-    <option value="">All Campuses</option>
-    <option>BEACON ASKARI O LEVEL SCHOOL</option>
-    <option>BEACON ASKARI SECONDARY SCHOOL</option>
-    <option>DREAM CAMBRIDGE CAMPUS</option>
-    <option>MONTESSORI EDEN OF BASS</option>
+
+    <option value="">
+        All Campuses
+    </option>
+
+    <option value="BEACON ASKARI O LEVEL SCHOOL">
+        BEACON ASKARI O LEVEL SCHOOL
+    </option>
+
+    <option value="BEACON ASKARI SECONDARY SCHOOL">
+        BEACON ASKARI SECONDARY SCHOOL
+    </option>
+
+    <option value="DREAM CAMBRIDGE CAMPUS">
+        DREAM CAMBRIDGE CAMPUS
+    </option>
+
+    <option value="MONTESSORI EDEN OF BASS">
+        MONTESSORI EDEN OF BASS
+    </option>
+
 </select>
 
-<!-- STATUS FILTER -->
+
+<!-- STATUS -->
+
 <select id="status">
-    <option value="">All Students</option>
-    <option value="ACTIVE">Active</option>
-    <option value="IN ACTIVE">In Active</option>
+
+    <option value="">
+        All Students
+    </option>
+
+    <option value="Active">
+        Active
+    </option>
+
+    <option value="In Active">
+        In Active
+    </option>
+
+    <option value="Inactive">
+        Inactive
+    </option>
+
 </select>
 
-<button onclick="searchStudent()">Search</button>
+
+<!-- SEARCH BUTTON -->
+
+<button
+    type="button"
+    onclick="searchStudent()"
+>
+    Search
+</button>
+
+
+<!-- CLEAR BUTTON -->
+
+<button
+    type="button"
+    class="clear-btn"
+    onclick="clearSearch()"
+>
+    Clear
+</button>
 ```
 
 </div>
 
-<p id="searchStatus"></p>
+<!-- =========================================
+     SEARCH STATUS
+========================================= -->
+
+<p id="searchStatus">
+    Loading student data...
+</p>
+
+<!-- =========================================
+     STUDENT RESULT TABLE
+========================================= -->
 
 <table id="result">
 
 ```
+<!-- TABLE HEADER -->
+
 <thead>
 
     <tr>
+
         <th>S.No</th>
+
         <th>GR#</th>
+
         <th>Name</th>
+
         <th>Father</th>
+
         <th>Class</th>
+
         <th>Section</th>
+
         <th>Contact</th>
+
         <th>DOB (MMM/DD/YYYY)</th>
+
         <th>Address</th>
+
         <th>Campus</th>
+
         <th>Status</th>
+
     </tr>
 
 </thead>
 
-<tbody></tbody>
+
+
+<!-- TABLE BODY -->
+
+<tbody>
+
+</tbody>
 ```
 
 </table>
 
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
 <script src="search.js"></script>
 
 </body>
+
 </html>
