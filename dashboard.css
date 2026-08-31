@@ -1,78 +1,509 @@
-body{
-font-family:Segoe UI;
-background:#f4f6fb;
-margin:0;
+/* =====================================================
+GENERAL PAGE
+===================================================== */
+
+* {
+  box-sizing: border-box;
+  }
+
+body {
+font-family: "Segoe UI", Arial, sans-serif;
+
+```
+background: #f4f6fb;
+
+margin: 0;
+
+padding: 0;
+
+color: #222;
+```
+
 }
 
-header{
-background:#2a5298;
-color:white;
-padding:15px;
-text-align:center;
+/* =====================================================
+HEADER
+===================================================== */
+
+header {
+background: #2a5298;
+
+```
+color: white;
+
+padding: 18px 15px;
+
+text-align: center;
+
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+```
+
 }
 
-.search-box{
-background:white;
-padding:20px;
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
+header h2 {
+margin: 0;
+
+```
+font-size: 24px;
+```
+
 }
+
+/* =====================================================
+SEARCH BOX
+===================================================== */
+
+.search-box {
+background: white;
+
+```
+padding: 20px;
+
+margin: 20px auto 10px;
+
+width: 95%;
+
+border-radius: 8px;
+
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 10px;
+
+justify-content: center;
+```
+
+}
+
+/* =====================================================
+SEARCH INPUTS
+===================================================== */
 
 .search-box input,
-.search-box select{
-padding:8px;
-border-radius:5px;
-border:1px solid #ccc;
+.search-box select {
+height: 40px;
+
+```
+padding: 8px 10px;
+
+border-radius: 5px;
+
+border: 1px solid #ccc;
+
+font-size: 14px;
+
+outline: none;
+
+background: white;
+```
+
 }
 
-.search-box button{
-background:#2a5298;
-color:white;
-border:none;
-padding:8px 20px;
-border-radius:5px;
-cursor:pointer;
+.search-box input {
+width: 145px;
 }
 
-table{
-width:95%;
-margin:auto;
-margin-top:20px;
-border-collapse:collapse;
-background:white;
+.search-box select {
+width: 220px;
+
+```
+cursor: pointer;
+```
+
 }
 
-th{
-background:#2a5298;
-color:white;
-padding:10px;
+/* =====================================================
+INPUT FOCUS
+===================================================== */
+
+.search-box input:focus,
+.search-box select:focus {
+border-color: #2a5298;
+
+```
+box-shadow: 0 0 3px rgba(42, 82, 152, 0.35);
+```
+
 }
 
-td{
-padding:10px;
-border-bottom:1px solid #eee;
+/* =====================================================
+SEARCH BUTTON
+===================================================== */
+
+.search-box button {
+height: 40px;
+
+```
+background: #2a5298;
+
+color: white;
+
+border: none;
+
+padding: 8px 22px;
+
+border-radius: 5px;
+
+cursor: pointer;
+
+font-size: 14px;
+
+font-weight: 600;
+```
+
 }
 
-tr:hover{
-background:#f2f6ff;
+.search-box button:hover {
+background: #1e3c72;
 }
 
-#searchStatus{
-text-align:center;
-font-weight:bold;
-margin-top:10px;
+/* =====================================================
+CLEAR BUTTON
+===================================================== */
+
+.search-box .clear-btn {
+background: #777;
 }
 
-td{
-max-width:200px;
-word-wrap:break-word;
-overflow-wrap:break-word;
-white-space:normal;
+.search-box .clear-btn:hover {
+background: #555;
 }
 
-td:nth-child(9){
-max-width:150px;
-word-break:break-word;
+/* =====================================================
+SEARCH STATUS
+===================================================== */
+
+#searchStatus {
+text-align: center;
+
+```
+font-weight: 600;
+
+margin: 12px 0;
+
+font-size: 15px;
+```
+
+}
+
+/* =====================================================
+TABLE CONTAINER EFFECT
+===================================================== */
+
+#result {
+width: 95%;
+
+```
+margin: 15px auto 30px;
+
+border-collapse: collapse;
+
+background: white;
+
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+border-radius: 6px;
+
+overflow: hidden;
+```
+
+}
+
+/* =====================================================
+TABLE HEADER
+===================================================== */
+
+#result thead th {
+background: #2a5298;
+
+```
+color: white;
+
+padding: 11px 8px;
+
+text-align: left;
+
+font-size: 14px;
+
+white-space: nowrap;
+
+border-right: 1px solid rgba(255, 255, 255, 0.15);
+```
+
+}
+
+/* =====================================================
+TABLE CELLS
+===================================================== */
+
+#result td {
+padding: 10px 8px;
+
+```
+border-bottom: 1px solid #eeeeee;
+
+font-size: 13px;
+
+vertical-align: top;
+
+word-wrap: break-word;
+
+overflow-wrap: break-word;
+
+white-space: normal;
+```
+
+}
+
+/* =====================================================
+TABLE ROW HOVER
+===================================================== */
+
+#result tbody tr:hover {
+background: #f2f6ff;
+}
+
+/* =====================================================
+COLUMN WIDTHS
+===================================================== */
+
+/* S.No */
+
+#result th:nth-child(1),
+#result td:nth-child(1) {
+width: 55px;
+
+```
+text-align: center;
+```
+
+}
+
+/* GR */
+
+#result th:nth-child(2),
+#result td:nth-child(2) {
+width: 80px;
+
+```
+white-space: nowrap;
+```
+
+}
+
+/* Name */
+
+#result th:nth-child(3),
+#result td:nth-child(3) {
+min-width: 150px;
+}
+
+/* Father */
+
+#result th:nth-child(4),
+#result td:nth-child(4) {
+min-width: 150px;
+}
+
+/* Class */
+
+#result th:nth-child(5),
+#result td:nth-child(5) {
+width: 80px;
+
+```
+white-space: nowrap;
+```
+
+}
+
+/* Section */
+
+#result th:nth-child(6),
+#result td:nth-child(6) {
+width: 80px;
+
+```
+white-space: nowrap;
+```
+
+}
+
+/* Contact */
+
+#result th:nth-child(7),
+#result td:nth-child(7) {
+width: 130px;
+
+```
+white-space: nowrap;
+```
+
+}
+
+/* DOB */
+
+#result th:nth-child(8),
+#result td:nth-child(8) {
+width: 130px;
+
+```
+white-space: nowrap;
+```
+
+}
+
+/* Address */
+
+#result th:nth-child(9),
+#result td:nth-child(9) {
+min-width: 220px;
+
+```
+max-width: 300px;
+
+word-break: break-word;
+```
+
+}
+
+/* Campus */
+
+#result th:nth-child(10),
+#result td:nth-child(10) {
+min-width: 220px;
+
+```
+max-width: 280px;
+
+word-break: break-word;
+```
+
+}
+
+/* Status */
+
+#result th:nth-child(11),
+#result td:nth-child(11) {
+width: 100px;
+
+```
+text-align: center;
+
+white-space: nowrap;
+```
+
+}
+
+/* =====================================================
+ACTIVE STATUS
+===================================================== */
+
+.status.active {
+color: #087f23;
+
+```
+font-weight: bold;
+
+background: #e8f7ed;
+
+border-radius: 4px;
+```
+
+}
+
+/* =====================================================
+INACTIVE STATUS
+===================================================== */
+
+.status.inactive {
+color: #c62828;
+
+```
+font-weight: bold;
+
+background: #fdeaea;
+
+border-radius: 4px;
+```
+
+}
+
+/* =====================================================
+TABLE STATUS CELL
+===================================================== */
+
+td.status {
+padding: 8px;
+
+```
+font-weight: bold;
+```
+
+}
+
+/* =====================================================
+MOBILE / SMALL SCREEN
+===================================================== */
+
+@media screen and (max-width: 900px) {
+
+```
+.search-box {
+    width: 98%;
+
+    padding: 15px;
+}
+
+
+.search-box input,
+.search-box select {
+    width: 100%;
+}
+
+
+.search-box button {
+    width: 100%;
+}
+
+
+#result {
+    width: 98%;
+
+    display: block;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+}
+
+
+#result th,
+#result td {
+    font-size: 12px;
+}
+```
+
+}
+
+/* =====================================================
+VERY SMALL SCREEN
+===================================================== */
+
+@media screen and (max-width: 500px) {
+
+```
+header h2 {
+    font-size: 19px;
+}
+
+
+#searchStatus {
+    font-size: 13px;
+}
+```
+
 }
