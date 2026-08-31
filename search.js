@@ -40,16 +40,36 @@ for(let i=1;i<rows.length;i++){
     let cols=parseCsvRow(line);
 
     students.push({
-        gr:cols[0]?.trim(),
-        name:cols[1]?.trim(),
-        father:cols[2]?.trim(),
-        p_class:cols[3]?.trim(),
-        section:cols[4]?.trim(),
-        contact:cols[7]?.trim(),
-        dob:cols[11]?.trim(),
-        address:cols[9]?.trim(),
-        campus:cols[10]?.trim()
-    });
+
+    gr: cols[0]?.trim(),
+    name: cols[1]?.trim(),
+    father: cols[2]?.trim(),
+
+    gender: cols[3]?.trim(),
+    dob: cols[4]?.trim(),
+
+    admission_class: cols[5]?.trim(),
+    p_class: cols[6]?.trim(),
+
+    section: cols[7]?.trim(),
+
+    campus: cols[13]?.trim(),
+
+    res_ph: cols[19]?.trim(),
+    father_cell: cols[20]?.trim(),
+    mother_cell: cols[21]?.trim(),
+
+    address: cols[22]?.trim(),
+
+    active: cols[24]?.trim(),
+
+    creation: cols[25]?.trim(),
+    last_edit: cols[26]?.trim(),
+
+    // Last column of CSV
+    status: cols[27]?.trim()
+
+});
 }
 
 });
