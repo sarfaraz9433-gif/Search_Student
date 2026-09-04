@@ -1,6 +1,6 @@
 /* =========================================================
-   STUDENT SEARCH DASHBOARD
-========================================================= */
+   STUDENT SEARCH SYSTEM
+   ========================================================= */
 
 let students = [];
 
@@ -40,7 +40,7 @@ function loadStudentData() {
         if (!response.ok) {
 
             throw new Error(
-                "Could not load student_data.csv. HTTP " +
+                "student_data.csv could not be loaded. HTTP " +
                 response.status
             );
 
@@ -55,24 +55,11 @@ function loadStudentData() {
     .then(function (data) {
 
         /*
-         * Remove Excel BOM
+         * Remove BOM
          */
 
         data =
             data.replace(/^\uFEFF/, "");
-
-
-        /*
-         * Check CSV
-         */
-
-        if (!data.trim()) {
-
-            throw new Error(
-                "student_data.csv is empty."
-            );
-
-        }
 
 
         /*
@@ -84,20 +71,20 @@ function loadStudentData() {
 
 
         console.log(
-            "================================"
+            "======================================"
         );
 
         console.log(
-            "CSV LOADED SUCCESSFULLY"
+            "CSV LOADING COMPLETE"
         );
 
         console.log(
-            "Total Records:",
+            "Total Student Records:",
             students.length
         );
 
         console.log(
-            "================================"
+            "======================================"
         );
 
 
@@ -108,7 +95,7 @@ function loadStudentData() {
         if (students.length > 0) {
 
             console.log(
-                "First Student:",
+                "FIRST STUDENT:",
                 students[0]
             );
 
@@ -123,7 +110,7 @@ function loadStudentData() {
 
 
         /*
-         * Update message
+         * Message
          */
 
         setStatus(
@@ -138,19 +125,8 @@ function loadStudentData() {
     .catch(function (error) {
 
         console.error(
-            "================================"
-        );
-
-        console.error(
-            "CSV ERROR"
-        );
-
-        console.error(
+            "CSV ERROR:",
             error
-        );
-
-        console.error(
-            "================================"
         );
 
 
@@ -189,13 +165,13 @@ function parseCSV(data) {
 
 
         /* =================================================
-           QUOTES
+           QUOTED FIELD
         ================================================= */
 
         if (char === '"') {
 
             /*
-             * Escaped quote ""
+             * Double quote inside quoted field
              */
 
             if (
@@ -261,17 +237,13 @@ function parseCSV(data) {
             }
 
 
-            /*
-             * Add final field
-             */
-
             row.push(
                 cleanValue(field)
             );
 
 
             /*
-             * Save row
+             * Ignore completely empty rows
              */
 
             if (
@@ -283,10 +255,6 @@ function parseCSV(data) {
 
             }
 
-
-            /*
-             * Reset
-             */
 
             row = [];
 
@@ -309,13 +277,17 @@ function parseCSV(data) {
 
 
     /*
-     * Add final row
+     * Last field
      */
 
     row.push(
         cleanValue(field)
     );
 
+
+    /*
+     * Last row
+     */
 
     if (
         row.length > 1 ||
@@ -328,34 +300,57 @@ function parseCSV(data) {
 
 
     /*
-     * No data
+     * No CSV rows
      */
 
     if (rows.length === 0) {
+
+        console.error(
+            "CSV contains no rows."
+        );
 
         return [];
 
     }
 
 
-    /*
-     * Header
-     */
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    const header =
+        rows[0];
+
 
     console.log(
-        "CSV Header:",
-        rows[0]
+        "CSV HEADINGS:",
+        header
     );
 
+
     console.log(
-        "CSV Column Count:",
-        rows[0].length
+        "CSV COLUMN COUNT:",
+        header.length
     );
 
 
     /*
-     * Convert rows to objects
+     * Check expected columns
      */
+
+    if (header.length !== 28) {
+
+        console.warn(
+            "WARNING: Expected 28 columns but header has " +
+            header.length
+        );
+
+    }
+
+
+    /* =====================================================
+       STUDENT DATA
+    ===================================================== */
 
     const result = [];
 
@@ -371,12 +366,12 @@ function parseCSV(data) {
 
 
         /*
-         * Skip empty rows
+         * Ignore empty rows
          */
 
         if (
             cols.length === 1 &&
-            !cols[0]
+            cols[0] === ""
         ) {
 
             continue;
@@ -385,17 +380,15 @@ function parseCSV(data) {
 
 
         /*
-         * Expected 28 columns
+         * Check columns
          */
 
         if (cols.length < 28) {
 
             console.warn(
-                "Row " +
-                (i + 1) +
-                " skipped.",
-                "Expected 28 columns.",
-                "Found:",
+                "ROW SKIPPED:",
+                i + 1,
+                "Expected 28 columns but found:",
                 cols.length,
                 cols
             );
@@ -406,96 +399,99 @@ function parseCSV(data) {
 
 
         /*
-         * Student object
+         * Create student object
          */
 
-        result.push({
+        const student = {
 
             gr:
-                cols[0] || "",
+                cols[0],
 
             name:
-                cols[1] || "",
+                cols[1],
 
             father:
-                cols[2] || "",
+                cols[2],
 
             gender:
-                cols[3] || "",
+                cols[3],
 
             dob:
-                cols[4] || "",
+                cols[4],
 
             admission_class:
-                cols[5] || "",
+                cols[5],
 
             p_class:
-                cols[6] || "",
+                cols[6],
 
             section:
-                cols[7] || "",
+                cols[7],
 
             policy_no:
-                cols[8] || "",
+                cols[8],
 
             category:
-                cols[9] || "",
+                cols[9],
 
             study_group:
-                cols[10] || "",
+                cols[10],
 
             academic_session:
-                cols[11] || "",
+                cols[11],
 
             child:
-                cols[12] || "",
+                cols[12],
 
             campus:
-                cols[13] || "",
+                cols[13],
 
             acc_no:
-                cols[14] || "",
+                cols[14],
 
             admission_date:
-                cols[15] || "",
+                cols[15],
 
             status_date:
-                cols[16] || "",
+                cols[16],
 
             leaving_date:
-                cols[17] || "",
+                cols[17],
 
             security_date:
-                cols[18] || "",
+                cols[18],
 
             res_ph:
-                cols[19] || "",
+                cols[19],
 
             father_cell:
-                cols[20] || "",
+                cols[20],
 
             mother_cell:
-                cols[21] || "",
+                cols[21],
 
             address:
-                cols[22] || "",
+                cols[22],
 
             pickup_mode:
-                cols[23] || "",
+                cols[23],
 
             active:
-                cols[24] || "",
+                cols[24],
 
             creation:
-                cols[25] || "",
+                cols[25],
 
             last_edit:
-                cols[26] || "",
+                cols[26],
 
             status:
-                cols[27] || ""
+                cols[27]
 
-        });
+        };
+
+
+        result.push(student);
 
     }
 
@@ -512,6 +508,7 @@ function parseCSV(data) {
 function cleanValue(value) {
 
     return String(value || "")
+        .replace(/^\uFEFF/, "")
         .trim()
         .replace(/^"|"$/g, "")
         .trim();
@@ -520,7 +517,7 @@ function cleanValue(value) {
 
 
 /* =========================================================
-   NORMALIZE TEXT
+   TEXT NORMALIZATION
 ========================================================= */
 
 function normalize(value) {
@@ -533,20 +530,19 @@ function normalize(value) {
 
 
 /* =========================================================
-   NORMALIZE PHONE
+   PHONE NORMALIZATION
 ========================================================= */
 
 function normalizePhone(value) {
 
     return String(value || "")
-        .replace(/[\s\-()+]/g, "")
-        .trim();
+        .replace(/\D/g, "");
 
 }
 
 
 /* =========================================================
-   NORMALIZE STATUS
+   STATUS NORMALIZATION
 ========================================================= */
 
 function normalizeStatus(value) {
@@ -560,7 +556,7 @@ function normalizeStatus(value) {
 
 
 /* =========================================================
-   GET FIELD VALUE
+   GET INPUT VALUE
 ========================================================= */
 
 function getValue(id) {
@@ -572,7 +568,7 @@ function getValue(id) {
     if (!element) {
 
         console.warn(
-            "Element not found:",
+            "Input not found:",
             id
         );
 
@@ -594,14 +590,10 @@ function getValue(id) {
 
 function searchStudent() {
 
-    /*
-     * Check data
-     */
-
     if (students.length === 0) {
 
         setStatus(
-            "⚠️ No student data loaded."
+            "⚠️ Student data is not loaded."
         );
 
         return;
@@ -609,14 +601,9 @@ function searchStudent() {
     }
 
 
-    setStatus(
-        "🔍 Searching..."
-    );
-
-
-    /* =====================================================
-       SEARCH VALUES
-    ===================================================== */
+    /*
+     * Search values
+     */
 
     const gr =
         getValue("gr");
@@ -651,7 +638,7 @@ function searchStudent() {
      */
 
     console.log(
-        "Search Values:",
+        "SEARCH:",
         {
             gr,
             name,
@@ -674,55 +661,74 @@ function searchStudent() {
         students.filter(function (student) {
 
 
-            /*
-             * Student values
-             */
+            /* =============================================
+               GR
+            ============================================= */
 
-            const studentGR =
-                normalize(student.gr);
+            const matchGR =
 
-            const studentName =
-                normalize(student.name);
+                !gr ||
 
-            const studentFather =
-                normalize(student.father);
-
-            const studentClass =
-                normalize(student.p_class);
-
-            const studentSection =
-                normalize(student.section);
-
-            const studentDOB =
-                normalize(student.dob);
-
-            const studentCampus =
-                normalize(student.campus);
-
-            const studentStatus =
-                normalizeStatus(
-                    student.status
-                );
+                normalize(
+                    student.gr
+                ).includes(gr);
 
 
-            /*
-             * Contact
-             */
+            /* =============================================
+               NAME
+            ============================================= */
 
-            const residencePhone =
-                normalizePhone(
-                    student.res_ph
-                );
+            const matchName =
 
-            const fatherPhone =
-                normalizePhone(
-                    student.father_cell
-                );
+                !name ||
 
-            const motherPhone =
-                normalizePhone(
-                    student.mother_cell
-                );
+                normalize(
+                    student.name
+                ).includes(name);
+
+
+            /* =============================================
+               FATHER
+            ============================================= */
+
+            const matchFather =
+
+                !father ||
+
+                normalize(
+                    student.father
+                ).includes(father);
+
+
+            /* =============================================
+               CLASS
+            ============================================= */
+
+            const matchClass =
+
+                !pClass ||
+
+                normalize(
+                    student.p_class
+                ).includes(pClass);
+
+
+            /* =============================================
+               SECTION
+            ============================================= */
+
+            const matchSection =
+
+                !section ||
+
+                normalize(
+                    student.section
+                ).includes(section);
+
+
+            /* =============================================
+               CONTACT
+            ============================================= */
 
             const searchPhone =
                 normalizePhone(
@@ -730,79 +736,80 @@ function searchStudent() {
                 );
 
 
-            /* =================================================
-               CONDITIONS
-            ================================================= */
-
-            const matchGR =
-
-                !gr ||
-                studentGR.includes(gr);
-
-
-            const matchName =
-
-                !name ||
-                studentName.includes(name);
-
-
-            const matchFather =
-
-                !father ||
-                studentFather.includes(father);
-
-
-            const matchClass =
-
-                !pClass ||
-                studentClass.includes(pClass);
-
-
-            const matchSection =
-
-                !section ||
-                studentSection.includes(section);
-
-
             const matchContact =
 
                 !contact ||
 
-                residencePhone.includes(
+                normalizePhone(
+                    student.res_ph
+                ).includes(
                     searchPhone
                 ) ||
 
-                fatherPhone.includes(
+                normalizePhone(
+                    student.father_cell
+                ).includes(
                     searchPhone
                 ) ||
 
-                motherPhone.includes(
+                normalizePhone(
+                    student.mother_cell
+                ).includes(
                     searchPhone
                 );
 
 
+            /* =============================================
+               DOB
+            ============================================= */
+
             const matchDOB =
 
                 !dob ||
-                studentDOB.includes(dob);
 
+                normalize(
+                    student.dob
+                ).includes(
+                    dob
+                );
+
+
+            /* =============================================
+               CAMPUS
+            ============================================= */
 
             const matchCampus =
 
                 !campus ||
-                studentCampus === campus;
 
+                normalize(
+                    student.campus
+                ) ===
+                normalize(
+                    campus
+                );
+
+
+            /* =============================================
+               STATUS
+            ============================================= */
 
             const matchStatus =
 
                 !status ||
-                studentStatus ===
-                normalizeStatus(status);
+
+                normalizeStatus(
+                    student.status
+                ) ===
+
+                normalizeStatus(
+                    status
+                );
 
 
-            /*
-             * ALL fields must match
-             */
+            /* =============================================
+               ALL CONDITIONS
+            ============================================= */
 
             return (
 
@@ -830,14 +837,14 @@ function searchStudent() {
 
 
     /*
-     * Display
+     * Display result
      */
 
     display(result);
 
 
     /*
-     * Message
+     * Search message
      */
 
     if (result.length === 0) {
@@ -874,13 +881,13 @@ function display(data) {
 
 
     /*
-     * Check table
+     * Make sure table exists
      */
 
     if (!tbody) {
 
         console.error(
-            'ERROR: #result tbody not found.'
+            "ERROR: #result tbody not found."
         );
 
         return;
@@ -889,14 +896,14 @@ function display(data) {
 
 
     /*
-     * Clear old records
+     * Clear table
      */
 
     tbody.innerHTML = "";
 
 
     /*
-     * No records
+     * No results
      */
 
     if (
@@ -909,10 +916,7 @@ function display(data) {
 
 
         row.innerHTML = `
-            <td
-                colspan="11"
-                style="text-align:center;"
-            >
+            <td colspan="11">
                 No records found
             </td>
         `;
@@ -926,140 +930,133 @@ function display(data) {
 
 
     /* =====================================================
-       DISPLAY EACH RECORD
+       CREATE ROWS
     ===================================================== */
 
-    data.forEach(function (
-        student,
-        index
-    ) {
+    data.forEach(
+        function (student, index) {
 
 
-        /*
-         * Contact priority
-         *
-         * Father
-         * Mother
-         * Residence
-         */
+            /*
+             * Contact priority:
+             *
+             * Father Cell
+             * Mother Cell
+             * Residence
+             */
 
-        const contact =
+            const contact =
 
-            student.father_cell ||
+                student.father_cell ||
 
-            student.mother_cell ||
+                student.mother_cell ||
 
-            student.res_ph ||
+                student.res_ph ||
 
-            "";
-
-
-        /*
-         * Status
-         */
-
-        const studentStatus =
-            String(
-                student.status || ""
-            ).trim();
+                "";
 
 
-        const statusNormalized =
-            normalizeStatus(
-                studentStatus
-            );
+            /*
+             * Status
+             */
+
+            const statusText =
+
+                String(
+                    student.status || ""
+                ).trim();
 
 
-        let statusClass = "";
+            const normalizedStatus =
+                normalizeStatus(
+                    statusText
+                );
 
 
-        if (
-            statusNormalized ===
-            "active"
-        ) {
+            let statusClass = "";
 
-            statusClass =
-                "active";
+
+            if (
+                normalizedStatus ===
+                "active"
+            ) {
+
+                statusClass =
+                    "active";
+
+            }
+
+            else if (
+                normalizedStatus ===
+                "inactive"
+            ) {
+
+                statusClass =
+                    "inactive";
+
+            }
+
+
+            /*
+             * Create row
+             */
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${escapeHTML(index + 1)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.gr)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.name)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.father)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.p_class)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.section)}
+                </td>
+
+                <td>
+                    ${escapeHTML(contact)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.dob)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.address)}
+                </td>
+
+                <td>
+                    ${escapeHTML(student.campus)}
+                </td>
+
+                <td class="status ${statusClass}">
+                    ${escapeHTML(statusText)}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
 
         }
-
-        else if (
-            statusNormalized ===
-            "inactive"
-        ) {
-
-            statusClass =
-                "inactive";
-
-        }
-
-
-        /*
-         * Create row
-         */
-
-        const row =
-            document.createElement("tr");
-
-
-        row.innerHTML = `
-
-            <td>
-                ${escapeHTML(index + 1)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.gr)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.name)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.father)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.p_class)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.section)}
-            </td>
-
-            <td>
-                ${escapeHTML(contact)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.dob)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.address)}
-            </td>
-
-            <td>
-                ${escapeHTML(student.campus)}
-            </td>
-
-            <td class="status ${statusClass}">
-                ${escapeHTML(studentStatus)}
-            </td>
-
-        `;
-
-
-        tbody.appendChild(row);
-
-    });
-
-
-    console.log(
-        "Displayed:",
-        data.length,
-        "records"
     );
 
 }
@@ -1102,10 +1099,6 @@ function clearSearch() {
     ];
 
 
-    /*
-     * Clear all inputs
-     */
-
     fields.forEach(function (id) {
 
         const element =
@@ -1122,7 +1115,7 @@ function clearSearch() {
 
 
     /*
-     * Display all students
+     * Show all students
      */
 
     display(students);
